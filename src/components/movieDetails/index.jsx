@@ -9,6 +9,7 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import SavingsIcon from "@mui/icons-material/Savings";
 
 
 const root = {
@@ -21,8 +22,15 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {  // Don't miss this!
+const formatBudget = (n) => {
+  const millions = Math.round(n / 1_000_000);
+  return `${millions}M`;
+};
+
+
+const MovieDetails = ({ movie }) => { 
   const [drawerOpen, setDrawerOpen] = useState(false);
+
 
   return (
     <>
@@ -54,6 +62,9 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
           icon={<MonetizationIcon />}
           label={`${movie.revenue.toLocaleString()}`}
         />
+        <Chip
+          icon={<SavingsIcon />}
+          label={`Budget: ${formatBudget(movie.budget)}`} />
         <Chip
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count})`}
